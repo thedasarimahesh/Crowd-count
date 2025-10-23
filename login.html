@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login | Video Analytics</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <div class="auth-card">
+      <h2>Video Analytics</h2>
+      <p class="subtitle">Crowd Monitoring System</p>
+
+      {% if error %}
+      <p class="error">{{ error }}</p>
+      {% endif %}
+
+      <form method="POST">
+        <label>Username</label>
+        <input type="text" name="username" placeholder="Enter your username" required>
+
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Enter your password" required>
+
+        <a href="#" class="forgot">Forgot Password?</a>
+        <button type="submit" class="btn">Login</button>
+      </form>
+
+      <p class="switch">Don’t have an account?
+        <a href="{{ url_for('signup') }}">Sign up</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>

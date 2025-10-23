@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard | Crowd Analytics</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="dashboard">
+    <aside class="sidebar">
+      <h2>Crowd Analytics</h2>
+      <ul>
+        <li class="active">Dashboard</li>
+        <li>Live Cameras</li>
+        <li>Analytics</li>
+        <li>Alerts</li>
+        <li>Settings</li>
+        <li>Reports</li>
+      </ul>
+      <a href="{{ url_for('logout') }}"><button class="logout-btn">Logout</button></a>
+    </aside>
+
+    <main class="main-content">
+      <header>
+        <h2>Welcome, {{ user.firstname }} {{ user.lastname }}</h2>
+        <div class="header-buttons">
+          <button class="btn">+ Add Camera</button>
+          <button class="btn">Export Report</button>
+        </div>
+      </header>
+
+      <section class="stats">
+        <div class="card"><h3>Live Camera Feeds</h3><p>0</p></div>
+        <div class="card"><h3>Current Crowd Count</h3><p>0</p></div>
+        <div class="card"><h3>Peak Today</h3><p>0</p></div>
+        <div class="card"><h3>Alerts Today</h3><p>0</p></div>
+      </section>
+
+      <section class="chart-area">
+        <h3>Crowd Count Overview</h3>
+        <canvas id="crowdChart"></canvas>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('crowdChart');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM'],
+        datasets: [{
+          label: 'Crowd Count',
+          data: [5, 9, 7, 10, 8, 12],
+          borderWidth: 2,
+          borderColor: '#007bff',
+          backgroundColor: 'rgba(0,123,255,0.1)',
+          fill: true,
+          tension: 0.3
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: { y: { beginAtZero: true } }
+      }
+    });
+  </script>
+</body>
+</html>
